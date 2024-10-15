@@ -4,6 +4,14 @@
     <input v-model="message" placeholder="Edit me">
     <p>Character count: {{ message.length }}</p>
   </div>
+  
+  <form >
+      <label for="username">用戶名:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">密碼:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+      <input type="submit" value="登入">
+  </form>
 </template>
 
 <script>
