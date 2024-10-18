@@ -1,4 +1,12 @@
 <template>
+
+  <div>
+    <h1> {{ typedText }}</h1>
+    <div>
+      <img src="@/assets/profile.jpg" class="profile-img">
+    </div>
+    
+  </div>
   <div>
     <h1>{{ message }}</h1>
     <input v-model="message" placeholder="Edit me">
@@ -18,10 +26,27 @@
 export default {
   data() {
     return {
-      message: 'Hello Vue!'
-    }
-  }
-}
+      message: 'Hello Vue!',
+      title : 'this is Cheng Zhe Wu\'s site ',
+      typedText: "",
+      index : 0,
+    };
+  },
+
+  methods:{
+    typeText(){
+      if (this.index < this.title.length){
+        this.typedText += this.title.charAt(this.index);
+        this.index++;
+        setTimeout(this.typeText, 50); //set type speed 50ms
+      }
+    },
+  },
+
+  mounted(){
+    this.typeText();
+  },
+};
 </script>
 
 <style>
@@ -41,4 +66,10 @@ input {
 h1, p {
   margin-bottom: 20px;
 }
+.profile-img{
+  max-width: 30%;
+  max-height: auto;
+  /* display: flex; */
+}
+
 </style>
