@@ -1,3 +1,4 @@
+// function area
 function csv(item){
     return item.split(',')  .map(x=>x.trim()).filter(x=>x);
 }
@@ -34,5 +35,7 @@ function dog(handle, isBug){
         }
     }
 };
+
+
 
 module.exports={print_log, print_bug,csv,ssv};

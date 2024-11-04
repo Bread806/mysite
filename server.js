@@ -1,17 +1,23 @@
-const mysql = require('mysql2');
+var MongoClient = require('mongodb').MongoClient;
+
+
 const path = require('path');
 const express = require('express');
 const app = express();
 const modules = require('./public/lib.js');
 
-// sql function
-// const SQL = mysql.createPool({
-//     connectionLimit : 10,
-//     host : 'localhost',
-//     user : 'root',
-//     password : 'root',
-//     database : ''
-// });
+// sql connect
+const uri = "mongodb://localhost:27017";
+const client = new MongoClient(uri);
+client.connect(); // try to connect db
+const database = client.db('db1');// chose a db
+const collection = database.collection('student');// get collection
+    
+    
+
+async function mongo_insert(client){
+    
+}
 
 for (m in modules)
     eval(`${m}=modules.${m}`); // import modules
@@ -26,7 +32,6 @@ app.use((req, res, next) => {
     console.log(requestTime(req)); // log time
     next(); 
 });
-
 // app.use('/', express.static(__dirname + "/public"));
 // app.use('/', express.static(__dirname + "/img"));
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -44,12 +49,18 @@ app.get('/cal', (req, res) => {
     res.send("cal result: " + c);
 });
 
+app.post('/create', (req, res) =>{
+    print_log("I am here");
+    res.send("OK");
+    mongo_create("AAA", 15, "BBB");
+});
+
 app.post('/testpost', (req,res) =>{
     res.send('login successful.\nWhat a colorful log!');
 });
 
 
-const port = 3000;
+const port = 5173;
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
